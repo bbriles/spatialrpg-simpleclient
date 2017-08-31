@@ -1,0 +1,5 @@
+.vs/
+packages/
+simpleclient/bin/
+simpleclient/node_modules/
+simpleclient/obj/

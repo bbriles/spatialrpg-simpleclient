@@ -1,0 +1,21 @@
+﻿<div class="row justify-content-center">
+    <div class="col text-center">
+        <div>
+            <button class="btn btn-warning" ng-click="GenerateEncounter()">Generate Encounter</button>
+        </div>
+
+        <div>
+            <h3>Encounters</h3>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="encounter in encounters">
+                    {{encounter.id}}
+                </li>
+            </ul>
+        </div>
+        <div>
+            <a href="#/party" class="btn btn-default">Party</a>
+            <a href="#/monsters"class="btn btn-default">Monster List</a>
+            <a href="#/user" class="btn btn-default">User Profile</a>
+        </div>
+    </div>
+</div>
