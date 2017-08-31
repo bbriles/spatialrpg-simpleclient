@@ -16,7 +16,6 @@ app.controller('mainController', function ($scope, $http, $location, gameService
         gameService.GetEncounters()
             .then(function success(data) {
                 $scope.encounters = data;
-                alert(JSON.stringify(data));
             });
         //TODO: Handle service errors
     };

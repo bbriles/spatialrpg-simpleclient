@@ -1,6 +1,11 @@
 ﻿<div class="row justify-content-center">
     <div class="col text-center">
-        <h3>Monsters List</h3>
+        <h3>Your Monsters</h3>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="monster in monsters">
+                {{monster.id}} - {{monster.kind.name}} - {{monster.kind.element}} - {{monster.kind.type}}
+            </li>
+        </ul>
         <div>
             <a href="#" class="btn btn-default">Back</a>
         </div>

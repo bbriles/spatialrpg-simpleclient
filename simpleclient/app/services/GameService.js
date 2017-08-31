@@ -1,6 +1,7 @@
 ﻿angular.module('app').service('gameService', function ($http, $q, $location) {
 
-    var ApiUrl = "http://localhost:50741"
+    var ApiUrl = "http://localhost:50741";
+    var UserId = 1;
 
 
     this.GenerateEncounter = function () {
@@ -27,11 +28,19 @@
         });
     };
 
-    this.GetParty = function () {
-        
+    this.GetMonsters = function () {
+        return $q(function (resolve, reject) {
+            $http.get(ApiUrl + '/api/monster/user/' + UserId)
+                .then(function (response) {
+                    resolve(response.data);
+                },
+                function (data) {
+                    reject("Error getting user's monsters");
+                });
+        });
     };
 
-    this.GetMonsters = function () {
+    this.GetParty = function () {
         
     };
 
