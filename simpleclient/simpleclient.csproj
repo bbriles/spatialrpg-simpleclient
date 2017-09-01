@@ -69,6 +69,7 @@
     <Content Include="app\controllers\BattleController.js" />
     <Content Include="app\controllers\MonstersController.js" />
     <Content Include="app\controllers\PartyController.js" />
+    <Content Include="app\controllers\UserController.js" />
     <Content Include="app\services\GameService.js" />
     <Content Include="app\views\battle.html" />
     <Content Include="app\views\monsters.html" />

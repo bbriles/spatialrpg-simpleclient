@@ -8,7 +8,7 @@
             <h3>Encounters</h3>
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="encounter in encounters">
-                    {{encounter.id}}
+                    <a ng-click="ClickEncounter(encounter.id);">{{encounter.id}}</a>
                 </li>
             </ul>
         </div>

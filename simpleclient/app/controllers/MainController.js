@@ -20,5 +20,13 @@ app.controller('mainController', function ($scope, $http, $location, gameService
         //TODO: Handle service errors
     };
 
+    $scope.ClickEncounter = function (encounterId) {
+        gameService.JoinEncounter(encounterId)
+            .then(function success() {
+               
+            });
+        //TODO: Handle service errors
+    };
+
     $scope.GetEncounters();
 });

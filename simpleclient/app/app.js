@@ -35,6 +35,13 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
             //    loggedIn: verifyLogin
             //}
         })
+        .when("/user", {
+            templateUrl: "app/views/user.html",
+            controller: "userController"//,
+            //resolve: {
+            //    loggedIn: verifyLogin
+            //}
+        })
         .when("/login", {
             templateUrl: "app/views/login.html",
             controller: "loginController"
