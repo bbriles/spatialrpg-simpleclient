@@ -42,6 +42,13 @@ app.config(function ($routeProvider, $locationProvider, $httpProvider) {
             //    loggedIn: verifyLogin
             //}
         })
+        .when("/battle", {
+            templateUrl: "app/views/battle.html",
+            controller: "battleController"//,
+            //resolve: {
+            //      loggedIn: verifyLogin
+            //}
+        })
         .when("/login", {
             templateUrl: "app/views/login.html",
             controller: "loginController"

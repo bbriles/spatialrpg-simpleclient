@@ -23,10 +23,26 @@ app.controller('mainController', function ($scope, $http, $location, gameService
     $scope.ClickEncounter = function (encounterId) {
         gameService.JoinEncounter(encounterId)
             .then(function success() {
-               
+                checkInBattle();
             });
         //TODO: Handle service errors
     };
 
+    function getUser() {
+        gameService.GetUser()
+            .then(function success(data) {
+                $scope.user = data;
+                checkInBattle();
+            })
+
+    }
+
+    function checkInBattle() {
+        if ($scope.user.inBattle) {
+            $location.url("battle");
+        }
+    }
+
+    getUser();
     $scope.GetEncounters();
 });

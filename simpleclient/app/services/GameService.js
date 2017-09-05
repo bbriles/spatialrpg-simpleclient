@@ -1,12 +1,15 @@
 ﻿angular.module('app').service('gameService', function ($http, $q, $location) {
 
-    var ApiUrl = "http://localhost:50741";
+    var ApiUrl = "http://localhost:57302";
     var UserId = 1;
+    this.User = {};
+    var InBattle = false;
 
     this.GetUser = function () {
         return $q(function (resolve, reject) {
             $http.get(ApiUrl + '/api/user/' + UserId)
                 .then(function (response) {
+                    this.User = response.data;
                     resolve(response.data);
                 },
                 function (data) {
@@ -67,6 +70,7 @@
         return $q(function (resolve, reject) {
             $http.post(ApiUrl + '/api/encounter/' + encounterId + '/join/' + UserId)
                 .then(function (response) {
+                    InBattle = true;
                     resolve();
                 },
                 function (data) {
