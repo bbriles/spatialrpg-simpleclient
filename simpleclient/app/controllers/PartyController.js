@@ -1,6 +1,6 @@
 ﻿var app = angular.module('app');
 
-app.controller('partyController', function ($scope, $http, $location, gameService) {
+app.controller('partyController', function ($scope, $location, gameService) {
 
     $scope.GetParty = function () {
         gameService.GetParty()

@@ -1,6 +1,6 @@
 ﻿var app = angular.module('app');
 
-app.controller('mainController', function ($scope, $http, $location, gameService) {
+app.controller('mainController', function ($scope, $location, gameService) {
 
     $scope.GenerateEncounter = function () {
         gameService.GenerateEncounter()

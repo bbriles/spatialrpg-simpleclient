@@ -1,6 +1,6 @@
 ﻿var app = angular.module('app');
 
-app.controller('loginController', function ($scope, $http, $cookies, $location) {
+app.controller('loginController', function ($scope, $cookies, $location) {
 
     $scope.login = function () {
 

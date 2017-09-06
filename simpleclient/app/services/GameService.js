@@ -1,6 +1,6 @@
 ﻿angular.module('app').service('gameService', function ($http, $q, $location) {
 
-    var ApiUrl = "http://localhost:57302";
+    var ApiUrl = "http://localhost:50741";
     var UserId = 1;
     this.User = {};
     var InBattle = false;
@@ -75,6 +75,18 @@
                 },
                 function (data) {
                     reject("Error joining encounter");
+                });
+        });
+    };
+
+    this.GetBattle = function () {
+        return $q(function (resolve, reject) {
+            $http.get(ApiUrl + '/api/battle/user/' + UserId)
+                .then(function (response) {
+                    resolve(response.data);
+                },
+                function (data) {
+                    reject("Error getting battle");
                 });
         });
     };

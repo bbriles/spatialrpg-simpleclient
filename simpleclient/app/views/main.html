@@ -13,7 +13,11 @@
             <h3>Encounters</h3>
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="encounter in encounters">
-                    <a ng-click="ClickEncounter(encounter.id);">{{encounter.id}}</a>
+                    <a ng-click="ClickEncounter(encounter.id);">{{encounter.id}}
+                        <span ng-repeat="monster in encounter.monsters">
+                            {{monster.kind.name}} 
+                        </span>
+                    </a>
                 </li>
             </ul>
         </div>

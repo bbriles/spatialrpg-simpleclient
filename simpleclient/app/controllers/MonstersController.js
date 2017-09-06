@@ -1,6 +1,6 @@
 ﻿var app = angular.module('app');
 
-app.controller('monstersController', function ($scope, $http, $location, gameService) {
+app.controller('monstersController', function ($scope, $location, gameService) {
 
     $scope.GetMonsters = function () {
         gameService.GetMonsters()

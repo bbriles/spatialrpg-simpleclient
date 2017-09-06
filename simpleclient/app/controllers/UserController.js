@@ -1,4 +1,4 @@
-﻿app.controller('userController', function ($scope, $http, $location, gameService) {
+﻿app.controller('userController', function ($scope, $location, gameService) {
 
     $scope.GetUser = function () {
         gameService.GetUser()
