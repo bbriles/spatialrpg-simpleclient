@@ -23,7 +23,7 @@ app.controller('mainController', function ($scope, $location, gameService) {
     $scope.ClickEncounter = function (encounterId) {
         gameService.JoinEncounter(encounterId)
             .then(function success() {
-                checkInBattle();
+                GetUser();
             });
         //TODO: Handle service errors
     };
@@ -33,7 +33,7 @@ app.controller('mainController', function ($scope, $location, gameService) {
             .then(function success(data) {
                 $scope.user = data;
                 checkInBattle();
-            })
+            });
 
     }
 

@@ -6,7 +6,7 @@ app.controller('battleController', function ($scope, $location, gameService) {
         gameService.GetBattle()
             .then(function success(data) {
                 $scope.battle = data;
-                alert(JSON.stringify(data));
+                $scope.info = JSON.stringify(data);
             });
         //TODO: Handle service errors
     };

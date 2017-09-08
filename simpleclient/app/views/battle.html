@@ -1,11 +1,26 @@
-﻿<div class="row justify-content-center">
+﻿<div class="row">
     <div class="col text-center">
         <h1>Battle</h1>
-        <div class="col-md-8">
-            <h3>Party</h3>
-        </div>
-        <div class="col-md-8">
-            <h3>Enemies</h3>
-        </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-6">
+        <h3>Party</h3>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="monster in battle.user.party.monsters">{{monster.kind.name}}</li>
+        </ul>
+    </div>
+    <div class="col-xs-6">
+        <h3>Enemies</h3>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="enemy in battle.enemies">
+                {{enemy.kind.name}}
+            </li>
+        </ul>
+    </div>
+</div>
+
+<p>
+    {{info}}
+</p>
+
