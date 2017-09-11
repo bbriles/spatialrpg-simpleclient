@@ -6,9 +6,9 @@
 <div class="row">
     <div class="col-xs-6">
         <h3>Party</h3>
-        <ul class="list-group">
-            <li class="list-group-item" ng-repeat="monster in battle.user.party.monsters">{{monster.kind.name}}</li>
-        </ul>
+        <div ng-repeat="monster in battle.user.party.monsters">
+            <span ng-class="{bg-primary: }">{{monster.kind.name}}</span>
+        </div>
     </div>
     <div class="col-xs-6">
         <h3>Enemies</h3>
@@ -19,7 +19,15 @@
         </ul>
     </div>
 </div>
-
+<div class="row">
+    <div class="col">
+        <button class="btn btn-default">Skill 1</button>
+        <button class="btn btn-default">Skill 2</button>
+        <button class="btn btn-default">Skill 3</button>
+        <button class="btn btn-primary">Recruit</button>
+        <button class="btn btn-danger">Back</button>
+    </div>
+</div>
 <p>
     {{info}}
 </p>

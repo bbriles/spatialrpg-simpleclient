@@ -2,6 +2,10 @@
 
 app.controller('battleController', function ($scope, $location, gameService) {
 
+    $scope.actionMessage = null;
+    $scope.isPlayerTurn = true;
+    $scope.currentIndex = 0;
+
     $scope.GetBattle = function () {
         gameService.GetBattle()
             .then(function success(data) {
