@@ -1,0 +1,11 @@
+﻿.currentMonster {
+    background-color: cornflowerblue;
+    border: 2px solid black;
+    color: white;
+}
+
+.monster {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+}

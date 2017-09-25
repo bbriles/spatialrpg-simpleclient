@@ -28,21 +28,21 @@ app.controller('mainController', function ($scope, $location, gameService) {
         //TODO: Handle service errors
     };
 
-    function getUser() {
+    function GetUser() {
         gameService.GetUser()
             .then(function success(data) {
                 $scope.user = data;
-                checkInBattle();
+                CheckInBattle();
             });
 
     }
 
-    function checkInBattle() {
+    function CheckInBattle() {
         if ($scope.user.inBattle) {
             $location.url("battle");
         }
     }
 
-    getUser();
+    GetUser();
     $scope.GetEncounters();
 });
