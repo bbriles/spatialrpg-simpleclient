@@ -7,26 +7,37 @@
     <div class="col-xs-6">
         <h3>Party</h3>
         <div class="monster" ng-repeat="monster in party" ng-click="SelectMonster(monster)" ng-class="{currentMonster: IsCurrentMonster(monster)}">
-            <span>{{monster.kind.name}}</span>
+            <span>{{monster.type.name}}</span>
+            <span ng-show="monster.action"> [ {{monster.currentSkill.name}} ]</span>
             <uib-progressbar animate="false" value="monster.stats.hpCurrent" max="monster.stats.hpMax" type="{{HpToProgressType(monster.stats.hpCurrent, monster.stats.hpMax)}}"><b>{{monster.stats.hpCurrent}}</b></uib-progressbar>
         </div>
     </div>
     <div class="col-xs-6">
         <h3>Enemies</h3>
-        <div class="monster" ng-repeat="monster in enemies">
-            <span>{{monster.kind.name}}</span>
+        <div class="monster" ng-repeat="monster in enemies" ng-click="ClickEnemy(monster)">
+            <span>{{monster.type.name}}</span>
             <uib-progressbar animate="false" value="monster.stats.hpCurrent" max="monster.stats.hpMax" type="{{HpToProgressType(monster.stats.hpCurrent, monster.stats.hpMax)}}"><b>{{monster.stats.hpCurrent}}</b></uib-progressbar>
         </div>
     </div>
 </div>
 <div class="row">
+    <span class="message">{{actionMessage}}</span>
+</div>
+<div class="row" ng-show="currentMonster && !selectingTarget">
     <div class="col">
-        <button class="btn btn-default">Skill 1</button>
-        <button class="btn btn-default">Skill 2</button>
-        <button class="btn btn-default">Skill 3</button>
-        <button class="btn btn-primary">Recruit</button>
-        <button class="btn btn-danger">Back</button>
+        <h4>Skills</h4>
+        <span ng-repeat="skill in currentMonster.type.skills">
+            <button class="btn btn-default" ng-click="ClickSkill(skill)">{{skill.name}}</button>
+        </span>
     </div>
+</div>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-danger" ng-click="SendActions()" ng-show="readyToSend">Go!</button>
+    </div>
+</div>
+<div class="well log">
+    {{log}}
 </div>
 <p>
     {{info}}

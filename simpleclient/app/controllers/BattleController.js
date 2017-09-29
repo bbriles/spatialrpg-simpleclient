@@ -4,9 +4,12 @@ app.controller('battleController', function ($scope, $location, gameService) {
 
     $scope.actionMessage = null;
     $scope.isPlayerTurn = false;
+    $scope.selectingTarget = false;
     $scope.party = null;
     $scope.enemies = null;
     $scope.currentMonster = null;
+    $scope.readyToSend = false;
+    $scope.log = "";
 
     $scope.GetBattle = function () {
         gameService.GetBattle()
@@ -31,14 +34,78 @@ app.controller('battleController', function ($scope, $location, gameService) {
         }
     }
 
-    $scope.HpToProgressType = function(hp, max)
-    {
+    $scope.HpToProgressType = function (hp, max) {
         if (hp > (max / 2))
             return "success";
         else if (hp > (max / 4)) {
             return "warning";
         }
         return "alert";
+    };
+
+    $scope.ClickSkill = function (skill) {
+        if ($scope.currentMonster) {
+
+            $scope.selectingTarget = true;
+            $scope.actionMessage = "Select Target";
+            $scope.currentMonster.currentSkill = skill;
+            // TODO: Handle self-targeting skills
+        }
+    };
+
+    $scope.ClickEnemy = function (enemy) {
+        if ($scope.selectingTarget) {
+
+            var battleAction = new BattleAction($scope.currentMonster.id, $scope.currentMonster.currentSkill.id, enemy.id);
+
+            $scope.currentMonster.action = battleAction;
+
+            $scope.actionMessage = null;
+            $scope.selectingTarget = false;
+
+            FinishAction(battleAction);
+        }
+    };
+
+    $scope.SendActions = function () {
+
+        var actions = [];
+
+        for (var i = 0; i < $scope.party.length; i++) {
+            var monster = $scope.party[i];
+            if (monster.action) {
+                actions.push(monster.action);
+            }
+        }
+
+        $scope.currentMonster = null;
+        $scope.isPlayerTurn = false;
+        $scope.readyToSend = false;
+
+        gameService.SendBattleUpdate($scope.battle.id, actions);
+    }
+
+    function FinishAction(action) {
+
+        var index = $scope.party.indexOf($scope.currentMonster);
+        if ($scope.party.length > index + 1) {
+            $scope.currentMonster = $scope.party[index + 1];
+        }
+
+        if (AreAllActionsSelected()) {
+            $scope.readyToSend = true;
+            $scope.currentMonster = null;
+        }
+    }
+
+    function AreAllActionsSelected() {
+        for (var i = 0; i < $scope.party.length; i++) {
+            var monster = $scope.party[i];
+            if (!monster.action) {
+                return false;
+            }
+        }
+        return true;
     }
 
     function PlayActions() {

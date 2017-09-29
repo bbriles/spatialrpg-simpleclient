@@ -91,4 +91,8 @@
         });
     };
 
+    this.SendBattleUpdate = function (battleId, actions) {
+        
+    }
+
 });

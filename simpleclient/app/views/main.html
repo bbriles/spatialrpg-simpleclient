@@ -15,7 +15,7 @@
                 <li class="list-group-item" ng-repeat="encounter in encounters">
                     <button class="btn" ng-click="ClickEncounter(encounter.id);">{{encounter.id}}
                         <span ng-repeat="monster in encounter.monsters">
-                            {{monster.kind.name}} 
+                            {{monster.type.name}} 
                         </span>
                     </button>
                 </li>
