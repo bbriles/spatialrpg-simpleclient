@@ -1,8 +1,8 @@
 ﻿class BattleAction {
 
-    constructor(monsterId, skillId, targetId) {
-        this.monsterId = monsterId;
+    constructor(monsterIndex, skillId, targetIndex) {
+        this.monsterIndex = monsterIndex;
         this.skillId = skillId;
-        this.targetId = targetId;
+        this.targetIndex = targetIndex;
     }
 }

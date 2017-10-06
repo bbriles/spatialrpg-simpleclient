@@ -9,6 +9,7 @@ app.controller('battleController', function ($scope, $location, gameService) {
     $scope.enemies = null;
     $scope.currentMonster = null;
     $scope.readyToSend = false;
+    $scope.showInfo = false;
     $scope.log = "";
 
     $scope.GetBattle = function () {
@@ -53,16 +54,19 @@ app.controller('battleController', function ($scope, $location, gameService) {
         }
     };
 
-    $scope.ClickEnemy = function (enemy) {
+    $scope.ClickEnemy = function (enemyIndex) {
         if ($scope.selectingTarget) {
 
-            var battleAction = new BattleAction($scope.currentMonster.id, $scope.currentMonster.currentSkill.id, enemy.id);
+            var index = $scope.party.indexOf($scope.currentMonster);
+            
+            var battleAction = new BattleAction(index, $scope.currentMonster.currentSkill.id, enemyIndex + $scope.battle.enemyIndexOffset);
 
             $scope.currentMonster.action = battleAction;
 
             $scope.actionMessage = null;
             $scope.selectingTarget = false;
 
+            LogAction($scope.battle.user.username, $scope.currentMonster, $scope.enemies[enemyIndex], $scope.currentMonster.currentSkill);
             FinishAction(battleAction);
         }
     };
@@ -81,6 +85,10 @@ app.controller('battleController', function ($scope, $location, gameService) {
         $scope.currentMonster = null;
         $scope.isPlayerTurn = false;
         $scope.readyToSend = false;
+
+        LogMessage("Go!");
+
+        $scope.info = JSON.stringify(actions);
 
         gameService.SendBattleUpdate($scope.battle.id, actions);
     }
@@ -121,6 +129,16 @@ app.controller('battleController', function ($scope, $location, gameService) {
         // TODO: Make it pick first alive monster, instead of just first
         $scope.currentMonster = $scope.party[0];
         $scope.isPlayerTurn = true;
+    }
+
+    function LogAction(ownerName, monster, target, skill) {
+        let name = ownerName != null ? ownerName + "'s " : "";
+
+        $scope.log += name + monster.type.name + " targets " + target.type.name + " with " + skill.name + "\n";
+    }
+
+    function LogMessage(message) {
+        $scope.log += message + "\n";
     }
 
     $scope.GetBattle();

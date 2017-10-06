@@ -92,7 +92,14 @@
     };
 
     this.SendBattleUpdate = function (battleId, actions) {
-        
-    }
-
+        return $q(function (resolve, reject) {
+            $http.post(ApiUrl + "/api/battle/" + battleId + "/actions", JSON.stringify(actions))
+                .then(function (response) {
+                    resolve(response.data);
+                },
+                function (data) {
+                    reject("Error sending battle actions");
+                });
+        });
+    };
 });

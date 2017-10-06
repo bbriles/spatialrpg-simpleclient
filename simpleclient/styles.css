@@ -15,7 +15,11 @@
     font-size: 18px;
 }
 
-.log {
-    height: 100px;
+.actionBar {
+    height: 90px;
+}
+
+.log pre {
+    height: 150px;
     overflow-y: auto;
 }

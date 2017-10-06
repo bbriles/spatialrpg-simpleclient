@@ -14,32 +14,33 @@
     </div>
     <div class="col-xs-6">
         <h3>Enemies</h3>
-        <div class="monster" ng-repeat="monster in enemies" ng-click="ClickEnemy(monster)">
+        <div class="monster" ng-repeat="monster in enemies" ng-click="ClickEnemy($index)">
             <span>{{monster.type.name}}</span>
             <uib-progressbar animate="false" value="monster.stats.hpCurrent" max="monster.stats.hpMax" type="{{HpToProgressType(monster.stats.hpCurrent, monster.stats.hpMax)}}"><b>{{monster.stats.hpCurrent}}</b></uib-progressbar>
         </div>
     </div>
 </div>
-<div class="row">
-    <span class="message">{{actionMessage}}</span>
-</div>
-<div class="row" ng-show="currentMonster && !selectingTarget">
-    <div class="col">
+
+<div class="row actionBar">
+    <div class="message">{{actionMessage}}</div>
+    <div class="col" ng-show="currentMonster && !selectingTarget">
         <h4>Skills</h4>
         <span ng-repeat="skill in currentMonster.type.skills">
             <button class="btn btn-default" ng-click="ClickSkill(skill)">{{skill.name}}</button>
         </span>
     </div>
-</div>
-<div class="row">
-    <div class="col">
-        <button class="btn btn-danger" ng-click="SendActions()" ng-show="readyToSend">Go!</button>
+    <div class="col" ng-show="readyToSend">
+        <button class="btn btn-danger" ng-click="SendActions()">Go!</button>
     </div>
 </div>
-<div class="well log">
-    {{log}}
+
+<div class="log">
+    <pre>{{log}}</pre>
 </div>
-<p>
-    {{info}}
-</p>
+<div class="panel panel-info">
+    <div class="panel-heading" ng-click="showInfo = !showInfo">JSON Data</div>
+    <div class="panel-body" ng-show="showInfo">
+        {{info}}
+    </div>
+</div>
 
