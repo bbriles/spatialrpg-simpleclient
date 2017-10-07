@@ -26,19 +26,19 @@ app.controller('battleController', function ($scope, $location, gameService) {
     };
 
     $scope.IsCurrentMonster = function (monster) {
-        return $scope.currentMonster == monster;
+        return $scope.currentMonster === monster;
     };
 
-    $scope.SelectMonster = function(monster) {
+    $scope.SelectMonster = function (monster) {
         if ($scope.isPlayerTurn) {
             $scope.currentMonster = monster;
         }
-    }
+    };
 
     $scope.HpToProgressType = function (hp, max) {
-        if (hp > (max / 2))
+        if (hp > max / 2)
             return "success";
-        else if (hp > (max / 4)) {
+        else if (hp > max / 4) {
             return "warning";
         }
         return "alert";
@@ -59,7 +59,7 @@ app.controller('battleController', function ($scope, $location, gameService) {
 
             var index = $scope.party.indexOf($scope.currentMonster);
             
-            var battleAction = new BattleAction(index, $scope.currentMonster.currentSkill.id, enemyIndex + $scope.battle.enemyIndexOffset);
+            var battleAction = new BattleAction("Party", index, $scope.currentMonster.currentSkill.id, enemyIndex, "Enemies");
 
             $scope.currentMonster.action = battleAction;
 
@@ -91,7 +91,7 @@ app.controller('battleController', function ($scope, $location, gameService) {
         $scope.info = JSON.stringify(actions);
 
         gameService.SendBattleUpdate($scope.battle.id, actions);
-    }
+    };
 
     function FinishAction(action) {
 
@@ -132,7 +132,7 @@ app.controller('battleController', function ($scope, $location, gameService) {
     }
 
     function LogAction(ownerName, monster, target, skill) {
-        let name = ownerName != null ? ownerName + "'s " : "";
+        let name = ownerName !== null ? ownerName + "'s " : "";
 
         $scope.log += name + monster.type.name + " targets " + target.type.name + " with " + skill.name + "\n";
     }
