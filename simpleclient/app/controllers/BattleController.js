@@ -20,7 +20,7 @@ app.controller('battleController', function ($scope, $location, gameService) {
                 $scope.enemies = $scope.battle.enemies;
                 $scope.info = JSON.stringify(data);
 
-                PlayActions();
+                NextRound();
             });
         //TODO: Handle service errors
     };
@@ -54,19 +54,17 @@ app.controller('battleController', function ($scope, $location, gameService) {
         }
     };
 
-    $scope.ClickEnemy = function (enemyIndex) {
+    $scope.ClickEnemy = function (enemy) {
         if ($scope.selectingTarget) {
 
-            var index = $scope.party.indexOf($scope.currentMonster);
-            
-            var battleAction = new BattleAction("Party", index, $scope.currentMonster.currentSkill.id, enemyIndex, "Enemies");
+            var battleAction = new BattleAction($scope.currentMonster.battleId, $scope.currentMonster.currentSkill.id, enemy.battleId, null);
 
             $scope.currentMonster.action = battleAction;
 
             $scope.actionMessage = null;
             $scope.selectingTarget = false;
 
-            LogAction($scope.battle.user.username, $scope.currentMonster, $scope.enemies[enemyIndex], $scope.currentMonster.currentSkill);
+            LogAction($scope.battle.user.username, $scope.currentMonster, enemy, $scope.currentMonster.currentSkill);
             FinishAction(battleAction);
         }
     };
@@ -90,7 +88,10 @@ app.controller('battleController', function ($scope, $location, gameService) {
 
         $scope.info = JSON.stringify(actions);
 
-        gameService.SendBattleUpdate($scope.battle.id, actions);
+        gameService.SendBattleUpdate($scope.battle.id, actions)
+            .then(function success(data) {
+                
+            });
     };
 
     function FinishAction(action) {
@@ -116,10 +117,12 @@ app.controller('battleController', function ($scope, $location, gameService) {
         return true;
     }
 
-    function PlayActions() {
-        if ($scope.battle.actions) {
-            // play out actions
+    function PlayRoundResult(battleRound) {
+
+        if (battleRound) {
+            
         }
+
         // check if we lost
         // go to next round
         NextRound();
@@ -142,5 +145,5 @@ app.controller('battleController', function ($scope, $location, gameService) {
     }
 
     $scope.GetBattle();
-    
+
 });

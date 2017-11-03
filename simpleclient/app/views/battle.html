@@ -7,15 +7,15 @@
     <div class="col-xs-6">
         <h3>Party</h3>
         <div class="monster" ng-repeat="monster in party" ng-click="SelectMonster(monster)" ng-class="{currentMonster: IsCurrentMonster(monster)}">
-            <span>{{monster.type.name}}</span>
+            <span>[{{monster.battleId}}]{{monster.type.name}}</span>
             <span ng-show="monster.action"> [ {{monster.currentSkill.name}} ]</span>
             <uib-progressbar animate="false" value="monster.stats.hpCurrent" max="monster.stats.hpMax" type="{{HpToProgressType(monster.stats.hpCurrent, monster.stats.hpMax)}}"><b>{{monster.stats.hpCurrent}}</b></uib-progressbar>
         </div>
     </div>
     <div class="col-xs-6">
         <h3>Enemies</h3>
-        <div class="monster" ng-repeat="monster in enemies" ng-click="ClickEnemy($index)">
-            <span>{{monster.type.name}}</span>
+        <div class="monster" ng-repeat="monster in enemies" ng-click="ClickEnemy(monster)">
+            <span>[{{monster.battleId}}]{{monster.type.name}}</span>
             <uib-progressbar animate="false" value="monster.stats.hpCurrent" max="monster.stats.hpMax" type="{{HpToProgressType(monster.stats.hpCurrent, monster.stats.hpMax)}}"><b>{{monster.stats.hpCurrent}}</b></uib-progressbar>
         </div>
     </div>

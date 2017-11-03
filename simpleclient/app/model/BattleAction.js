@@ -1,10 +1,9 @@
 ﻿class BattleAction {
 
-    constructor(monsterGroup, monsterIndex, skillId, targetIndex, targetGroup) {
-        this.monsterGroup = monsterGroup;
-        this.monsterIndex = monsterIndex;
+    constructor(monsterBattleId, skillId, targetBattleId, targetGroup) {
+        this.monsterBattleId = monsterBattleId;
         this.skillId = skillId;
-        this.targetIndex = targetIndex;
+        this.targetBattleId = targetBattleId;
         this.targetGroup = targetGroup;
     }
 }
